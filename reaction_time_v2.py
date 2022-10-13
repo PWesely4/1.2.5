@@ -1,4 +1,4 @@
-#reaction_time_v1
+#reaction_time_v2
 import turtle as trtl
 import random as rand
 import time
