@@ -1,7 +1,10 @@
-#reaction_time_v2
+#reaction_time_v2.2
 import turtle as trtl
 import random as rand
 import time
+playagain = ("y")
+leadernamelist = []
+leaderscorelist = []
 wn = trtl.Screen()
 react = trtl.Turtle()
 react.turtlesize(100)
@@ -16,7 +19,12 @@ timer = (rand.randint(1,100)/20)
 start_time = 0
 time_lapsed = 0
 clicker =  trtl.Turtle()
+name = input("what is your name?")
+score = 0
 #functions
+def settimer():
+  global timer
+  timer = (rand.randint(1,100)/20)
 def change_color():
   global start_time
   start_time = time.time()
@@ -41,16 +49,32 @@ def position_counter():
 def handle_click(x,y):
   global start_time
   global time_lapsed
+  global score
   react.color("black")
   end_time = time.time()
   time_lapsed = end_time - start_time
   counter.write(time_lapsed, font=font_setup)
+  score = time_lapsed
+  return score
 
+'''def handle_leaderboard():
+  global name
+  global score
+  while score '''
+def playgame():
+  global playagain
+  global timer_up
+
+  wn.ontimer(countdown, counter_interval) 
+  wn.onscreenclick(handle_click,1)
+  wn.listen()
+  playagain = input("Do you want to play? y or n")
+  return playagain
 #events
 position_counter()
-wn.ontimer(countdown, counter_interval) 
-#wn.onkeypress(GoUp,"w")
-wn.onscreenclick(handle_click,1)
-
-wn.listen()
+while playagain == ("y"):
+  settimer()
+  react.color("black")
+  playgame()
+  
 wn.mainloop()
